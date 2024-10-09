@@ -23,6 +23,37 @@ public:
     // constructor
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
+    void delete_pos(int pos)
+    {
+        if (pos < 0) {
+        cout << "Position must be >= 0." << endl;
+        return;
+        }
+        
+        if (!head) return; // Empty list
+
+        Node* temp = head;
+        for (size_t i = 0; i < pos && temp; i++)
+        {
+            /* code */
+        }
+        
+
+        if (temp->prev) {
+            temp->prev->next = temp->next;
+        } else {
+            head = temp->next; // Deleting the head
+        }
+
+        if (temp->next) {
+            temp->next->prev = temp->prev;
+        } else {
+            tail = temp->prev; // Deleting the tail
+        }
+
+        delete temp;
+    }
+
     void push_back(int value) {
         Node* newNode = new Node(value);
         if (!tail) // if there's no tail, the list is empty
@@ -145,6 +176,6 @@ int main() {
     list.~DoublyLinkedList();
     cout << "List forward: ";
     list.print();
-    
+
     return 0;
 }
