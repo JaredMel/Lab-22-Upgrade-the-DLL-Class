@@ -32,6 +32,7 @@ public:
             temp->next->prev = temp->prev;
         } else {
             tail = temp->prev; // Deleting the tail
+            tail->next = nullptr;
         }
 
         delete temp;
