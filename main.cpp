@@ -23,6 +23,20 @@ public:
     // constructor
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
+    void pop_back()
+    {
+        if (!head) return; // Empty list
+
+        Node* temp = tail;
+        if (temp->next) {
+            temp->next->prev = temp->prev;
+        } else {
+            tail = temp->prev; // Deleting the tail
+        }
+
+        delete temp;
+    }
+
     void pop_front()
     {
         if (!head) return; // Empty list
@@ -33,8 +47,10 @@ public:
         } else {
             head = temp->next; // Deleting the head
         }
+
+        delete temp;
     }
-    
+
     void delete_pos(int pos)
     {
         if (pos < 0) {
@@ -118,7 +134,7 @@ public:
     temp->next = newNode;
     }
 
-    void delete_node(int value) {
+    void delete_val(int value) {
         if (!head) return; // Empty list
 
         Node* temp = head;
@@ -182,6 +198,18 @@ int main() {
 
     cout << "List backward: ";
     list.print_reverse();
+
+    cout << "Deleting Node at position 3: ";
+    list.delete_pos(3);
+    list.print();
+
+    cout << "Deleting head Node: ";
+    list.pop_front();
+    list.print();
+
+    cout << "Deleting tail Node: ";
+    list.pop_back();
+    list.print();
 
     cout << "Deleting list, then trying to print.\n";
     list.~DoublyLinkedList();
