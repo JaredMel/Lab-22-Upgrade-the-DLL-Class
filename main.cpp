@@ -23,22 +23,33 @@ public:
     // constructor
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
+    void pop_front()
+    {
+        if (!head) return; // Empty list
+
+        Node* temp = head;
+        if (temp->prev) {
+            temp->prev->next = temp->next;
+        } else {
+            head = temp->next; // Deleting the head
+        }
+    }
+    
     void delete_pos(int pos)
     {
         if (pos < 0) {
         cout << "Position must be >= 0." << endl;
         return;
         }
-        
+
         if (!head) return; // Empty list
 
         Node* temp = head;
         for (size_t i = 0; i < pos && temp; i++)
         {
-            /* code */
+            temp = temp->next;
         }
         
-
         if (temp->prev) {
             temp->prev->next = temp->next;
         } else {
